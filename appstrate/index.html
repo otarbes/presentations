@@ -1715,7 +1715,7 @@
         </summary>
         <div class="hd-body">
           <p class="tight" style="margin-bottom: 12px;">
-            La vraie catégorie "managed agent runtime" au sens strict (vendor qui gère lui-même l'isolation d'exécution : microVM, sandbox éphémère pour le code de l'agent) <strong>est née en juillet 2025 avec AWS Bedrock AgentCore</strong>. En moins d'un an, 5 acteurs majeurs ont rejoint la catégorie. Tous closed source. Appstrate est le seul open source du lot.
+            La vraie catégorie "managed agent runtime" au sens strict (vendor qui gère lui-même l'isolation d'exécution : microVM, sandbox éphémère pour le code de l'agent) <strong>est née en juillet 2025 avec AWS Bedrock AgentCore</strong>. En moins d'un an, 5 acteurs majeurs ont rejoint la catégorie. Tous gardent leur runtime propriétaire (leur <em>framework</em> est souvent open source, pas le <em>runtime</em>). Appstrate est le seul dont le runtime entier est open source.
           </p>
           <p style="margin-bottom: 24px; font-size: 13px; color: var(--text-muted);">
             Avant juillet 2025, OpenAI Assistants (nov 2023), Bedrock Agents (nov 2023) et Vertex Agent Builder (avril 2024) faisaient de <em>l'orchestration agentique managée</em> mais sans sandbox d'exécution propre : function calling = votre code, action groups = vos Lambdas. C'étaient des précurseurs, pas des full runtimes au sens où AgentCore l'a redéfini.
@@ -1797,7 +1797,7 @@
           </div>
 
           <p style="margin-top: 24px; font-size: 13px; color: var(--text-muted); line-height: 1.7;">
-            <strong style="color: var(--text);">En résumé</strong> : la catégorie au sens strict a 10 mois. AWS l'a inaugurée en juillet 2025 avec AgentCore. Appstrate a sorti sa première alpha publique en mars 2026, avant Claude Managed. Anthropic, LangChain et Google ont rejoint la catégorie en quelques semaines en avril-mai 2026. Aucun des 5 hyperscalers n'est open source. Appstrate l'est, Apache 2.0, avec un runtime déployable on-prem en entier.
+            <strong style="color: var(--text);">En résumé</strong> : la catégorie au sens strict a 10 mois. AWS l'a inaugurée en juillet 2025 avec AgentCore. Appstrate a sorti sa première alpha publique en mars 2026, avant Claude Managed. Anthropic, LangChain et Google ont rejoint la catégorie en quelques semaines en avril-mai 2026. Aucun de ces runtimes managés n'est open source : plusieurs publient leur <em>framework</em> (LangGraph/Deep Agents, AWS Strands, Google ADK) mais gardent le <em>runtime</em> fermé. Appstrate est le seul dont le runtime entier est open source, Apache 2.0, déployable on-prem en entier.
           </p>
         </div>
       </details>
@@ -1815,7 +1815,7 @@
         </div>
         <div class="compare-row">
           <div class="col-label">Self-hosting</div>
-          <div class="col-left"><span class="check-partial">~</span>Partiel. Claude Managed propose des <em>self-hosted sandboxes</em> (public beta, mai 2026) : exécution des tools sur votre infrastructure ou Cloudflare, Daytona, Modal, Vercel. Et des <em>MCP tunnels</em> pour atteindre vos MCP servers privés sans exposition publique. Mais l'<em>agent loop</em> (orchestration, context management, error recovery) reste explicitement chez Anthropic. Air-gap impossible : dépendance outbound permanente au control plane Anthropic. Chez les autres managed runtimes : exécution cloud only.</div>
+          <div class="col-left"><span class="check-partial">~</span>Partiel. Claude Managed propose des <em>self-hosted sandboxes</em> (public beta, mai 2026) : l'exécution des tools tourne chez vous (votre infra, ou Cloudflare, Daytona, Modal, Vercel) via un <em>environment worker</em> qui poll la file d'Anthropic en sortant. Mais l'<em>agent loop</em> (orchestration, contexte, error recovery) et le modèle restent chez Anthropic, et les entrées/sorties des tools y transitent malgré tout. Les <em>MCP tunnels</em> (research preview) atteignent vos MCP servers privés sans exposition publique. Air-gap impossible : dépendance outbound permanente au control plane Anthropic. Chez les autres managed runtimes : exécution cloud only.</div>
           <div class="col-right"><span class="check-ok">✓</span>Le runtime <strong>entier</strong> tourne chez vous : agent loop, orchestration, stockage des credentials, audit, sandbox. Laptop, VPS, K8s, on-prem, air-gap complet. Mêmes binaires partout.</div>
         </div>
         <div class="compare-row">
